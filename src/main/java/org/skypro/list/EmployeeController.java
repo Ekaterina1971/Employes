@@ -1,0 +1,53 @@
+package org.skypro.list;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(path = "/employee")
+public class EmployeeController {
+    private final EmployeeService employeeService;
+    public EmployeeController(EmployeeService employeeService){
+        this.employeeService = employeeService;
+    }
+@GetMapping("/add")
+    public Employee add(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    try {
+        employeeService.add(firstName, lastName);
+    } catch (EmployeeStoragelsFullException employeeStoragelsFullException) {
+        System.out.println("Превышен лимит сотрудников");
+    } catch (EmployeeAlreadyAddedException employeeAlreadyAddedException) {
+        System.out.println("Такой сотрудник уже существует");
+    }
+    Employee employee = new Employee(firstName, lastName);
+    return employee;
+}
+@GetMapping("/remove")
+    public Employee remove(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    try {
+        employeeService.remove(firstName, lastName);
+    } catch (EmployeeNotFoundException employeeNotFoundException) {
+        System.out.println("Сотрудник не найден");
+    }
+    return null;
+}
+@GetMapping("/find")
+    public String find(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
+        try {
+            employeeService.find(firstName, lastName);
+        } catch (EmployeeNotFoundException employeeNotFoundException) {
+            System.out.println("Сотрудник не найден");
+        } return firstName + lastName;
+
+    }
+}
+
+
+
+
+
+
+
+

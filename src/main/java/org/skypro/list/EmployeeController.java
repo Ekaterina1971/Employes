@@ -12,13 +12,13 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService){
         this.employeeService = employeeService;
     }
-@GetMapping("/add")
+    @GetMapping("/add")
     public Employee add(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
     try {
         employeeService.add(firstName, lastName);
-    } catch (EmployeeStoragelsFullException employeeStoragelsFullException) {
+    } catch (EmployeeStoragelsFullException employeeStoragelsFullException){
         System.out.println("Превышен лимит сотрудников");
-    } catch (EmployeeAlreadyAddedException employeeAlreadyAddedException) {
+    }catch (EmployeeAlreadyAddedException employeeAlreadyAddedException) {
         System.out.println("Такой сотрудник уже существует");
     }
     Employee employee = new Employee(firstName, lastName);

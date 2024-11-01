@@ -16,6 +16,7 @@ public class EmployeeService {
                 new Employee("Roman", "Barinov"),
                 new Employee("Damir", "Kovrov")
         ));
+
         public Employee add(String firstName, String lastName){
             if(employees.size() >= maxNumber){
                 throw new EmployeeStoragelsFullException("Превышен лимит сотрудников");
@@ -28,7 +29,7 @@ public class EmployeeService {
             return employee;
         }
         public Employee remove(String firstName, String lastName) throws EmployeeNotFoundException{
-            //remove(firstName, lastName);
+           // remove(firstName, lastName);
             if (firstName.contains(null) & lastName.contains(null)) {
                 throw new EmployeeNotFoundException("Сотрудник не найден");
             }
@@ -37,7 +38,7 @@ public class EmployeeService {
         }
 
         public Employee find(String firstName, String lastName) throws EmployeeNotFoundException{
-            //find(firstName, lastName);
+            find(firstName, lastName);
             if(firstName.contains(null) & lastName.contains(null)) {
                 throw new EmployeeNotFoundException("Сотрудник не найден");
             }

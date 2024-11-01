@@ -29,7 +29,7 @@ public class EmployeeService {
             return employee;
         }
         public Employee remove(String firstName, String lastName) throws EmployeeNotFoundException{
-           // remove(firstName, lastName);
+           //remove(firstName, lastName);
             if (firstName.contains(null) & lastName.contains(null)) {
                 throw new EmployeeNotFoundException("Сотрудник не найден");
             }

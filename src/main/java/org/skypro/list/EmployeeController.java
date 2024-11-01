@@ -30,8 +30,9 @@ public class EmployeeController {
         employeeService.remove(firstName, lastName);
     } catch (EmployeeNotFoundException employeeNotFoundException) {
         System.out.println("Сотрудник не найден");
-    }
+    }   System.out.println("Сотрудник удален");
     return null;
+
 }
 @GetMapping("/find")
     public String find(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){

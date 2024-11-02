@@ -9,7 +9,7 @@ public class EmployeeNotFoundException extends RuntimeException{
    public String lastName;
 
    public EmployeeNotFoundException(String firstName, String lastName){
-       super("%s %s".formatted(firstName,lastName));
+       super();
        this.firstName = firstName;
        this.lastName = lastName;
    }

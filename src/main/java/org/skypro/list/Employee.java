@@ -9,6 +9,7 @@ public class Employee {
         this.firstName = fistName;
         this.lastName = lastName;
     }
+
     public String getFirstName(){
         return firstName;
     }

@@ -1,5 +1,7 @@
 package org.skypro.list;
 
+import java.util.Objects;
+
 public class Employee {
     private final String firstName;
     private final String lastName;
@@ -31,6 +33,8 @@ public class Employee {
         if (!(o instanceof Employee)) return false;
         Employee employee = (Employee) o;
         return getId() == employee.getId();
+        //return Objects.equals(getFirstName(),
+               // employee.getFirstName()) && Objects.equals(getLastName(), employee.getLastName());}
     }
     @Override
     public int hashCode() {

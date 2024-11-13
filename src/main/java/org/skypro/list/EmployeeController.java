@@ -5,20 +5,61 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Collection;
 
 @RestController
 @RequestMapping(path = "/employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
-    public EmployeeController(EmployeeService employeeService){
-        this.employeeService = employeeService;
+    private final EmployeeService service;
+
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
     }
+
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam("firstName") String firstName,
-                        @RequestParam("lastName") String lastName) {
-        return employeeService.add(firstName, lastName);
+    public Employee add(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int departamentId, @RequestParam double salary) {
+        return service.add(firstName, lastName, departamentId, salary);
     }
+
+    @GetMapping("/remove")
+    public Employee remove(@RequestParam String firstName, @RequestParam String lastName,@RequestParam int departamentId, @RequestParam double salary) {
+        return service.remove(firstName, lastName,departamentId, salary);
+    }
+
+    @GetMapping("/find")
+    public Employee find(@RequestParam String firstName, @RequestParam String lastName,@RequestParam int departamentId, @RequestParam double salary) {
+        return service.find(firstName, lastName,departamentId, salary);
+    }
+
+    @GetMapping("/findAll")
+    public Collection<Employee> getAllEmployees() {
+        return service.getAllEmployees();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//public class EmployeeController {
+  //  private final EmployeeService employeeService;
+    //public EmployeeController(EmployeeService employeeService){
+      //  this.employeeService = employeeService;
+   // }
+   // @GetMapping("/add")
+  //  public Employee addEmployee(@RequestParam("firstName") String firstName,
+       //                 @RequestParam("lastName") String lastName) {
+    //    return employeeService.add(firstName, lastName);
+  //  }
         // employeeService.add(firstName, lastName);
     // catch (EmployeeStoragelsFullException employeeStoragelsFullException){
       // System.out.println("Превышен лимит сотрудников");
@@ -28,11 +69,11 @@ public class EmployeeController {
     //Employee employee = new Employee(firstName, lastName);
    // return employee;
 
-@GetMapping("/remove")
-    public Employee removeEmployee(@RequestParam("firstName") String firstName,
-                           @RequestParam("lastName") String lastName) {
-    return employeeService.remove(firstName, lastName);
-    }
+//@GetMapping("/remove")
+  //  public Employee removeEmployee(@RequestParam("firstName") String firstName,
+          //                 @RequestParam("lastName") String lastName) {
+ //   return employeeService.remove(firstName, lastName);
+ //   }
     //try {
       //  employeeService.remove(firstName, lastName);
    // } catch (EmployeeNotFoundException employeeNotFoundException) {
@@ -40,16 +81,15 @@ public class EmployeeController {
    // }   System.out.println("Сотрудник удален");
    // return null;
 
-@GetMapping("/find")
-    public Employee findEmployee(@RequestParam("firstName") String firstName,
-                       @RequestParam("lastName") String lastName) {
-    return employeeService.find(firstName, lastName);
-    }
-@GetMapping("/allEmployees")
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAll();
-    }
-}
+//@GetMapping("/find")
+  //  public Employee find(@RequestParam String firstName, @RequestParam String lastName) {
+      //  return service.find(firstName, lastName);
+  //  }
+//@GetMapping("/allEmployees")
+  //  public List<Employee> getAllEmployees() {
+     //   return employeeService.getAll();
+   // }
+
        // try {
            // employeeService.find(firstName, lastName);
       //  } catch (EmployeeNotFoundException employeeNotFoundException) {

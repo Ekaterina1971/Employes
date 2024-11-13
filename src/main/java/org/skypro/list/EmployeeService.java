@@ -1,68 +1,10 @@
 package org.skypro.list;
 
-import org.springframework.stereotype.Service;
+import java.util.Collection;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Service
-public class EmployeeService {
-    static final int maxNumber = 6;
-    List<Employee> employees = new ArrayList<>(List.of(
-            new Employee("Oleg", "Ivanov"),
-            new Employee("Ivan", "Fedorov"),
-            new Employee("Vera", "Vasileva"),
-            new Employee("Fred", "Dobrov"),
-            new Employee("Roman", "Barinov"),
-            new Employee("Damir", "Kovrov")
-    ));
-
-    public Employee add(String firstName, String lastName){
-
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.size() >= maxNumber) {
-            throw new EmployeeStoragelsFullException("Превышен лимит сотрудников");
-        }
-        if (employees.contains(employee)) {
-            throw new EmployeeAlreadyAddedException("Такой сотрудник уже существует");
-        }
-        employees.add(employee);
-        return employee;
-    }
-
-    public Employee remove(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (!employees.contains(employee)) {
-            throw new EmployeeNotFoundException("Сотрудник не найден");
-        }
-        employees.remove(employee);
-        return employee;
-   }
-    // public Employee remove(String firstName, String lastName) throws EmployeeNotFoundException{
-    //remove(firstName, lastName);
-    // if (firstName.contains(null) & lastName.contains(null)) {
-    //    throw new EmployeeNotFoundException("Сотрудник не найден");
-    //}
-    // employees.remove(employees);
-    //  return null;
-    //  }
-    public Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (!employees.contains(employee)) {
-            throw new EmployeeNotFoundException("Сотрудник не найден");
-        }
-        return employee;
-    }
-    public List<Employee> getAll(){
-        return employees;
-    }
+public interface EmployeeService {
+    Employee add(String firstName, String lastName, int departamentId, double salary);
+    Employee remove(String firstName, String lastName,int departamentId, double salary);
+    Employee find(String firstName, String lastName,int departamentId, double salary);
+    Collection<Employee> getAllEmployees();
 }
-       // public Employee find(String firstName, String lastName) throws EmployeeNotFoundException{
-           // find(firstName, lastName);
-           // if(firstName.contains(null) & lastName.contains(null)) {
-            //  throw new EmployeeNotFoundException("Сотрудник не найден");
-            //}
-            //return (Employee) employees;
-
-
-

@@ -1,48 +1,70 @@
 package org.skypro.list;
 
+import jakarta.annotation.PostConstruct;
+
 import java.util.Objects;
 
 public class Employee {
-    private final String firstName;
-    private final String lastName;
-    private int id;
+    private String firstName;
+    private String lastName;
+    private int departamentId;
+    private double salary;
 
-    public Employee(String fistName, String lastName){
-        this.firstName = fistName;
+    public Employee(String firstName, String lastName, int departamentId, double salary) {
+        this.firstName = firstName;
         this.lastName = lastName;
+        this.departamentId = departamentId;
+        this.salary = salary;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
-    public String getLastName(){
+
+    public String getLastName() {
         return lastName;
     }
-    public int getId(){
-        return id;
+
+    public String getFullName(){
+        return firstName + lastName;
     }
-    public String setFistName(){
-        return firstName;
+
+    public int getDepartamentId(){
+        return departamentId;
     }
-    public String setLastName(){
-        return lastName;
+
+    public double getSalary(){
+        return salary;
     }
+
+    public void setDepartamentId(int departamentId) {
+        this.departamentId = departamentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        Employee employee = (Employee) o;
-        return getId() == employee.getId();
-        //return Objects.equals(getFirstName(),
-               // employee.getFirstName()) && Objects.equals(getLastName(), employee.getLastName());}
-    }
-    @Override
-    public int hashCode() {
-        return getId();
+        if (!(o instanceof Employee employee)) return false;
+        return departamentId == employee.departamentId &&
+                Double.compare(salary, employee.salary) == 0
+                && Objects.equals(lastName, employee.lastName)
+                && Objects.equals(firstName, employee.firstName);
     }
 
     @Override
-    public String toString() {
-        return firstName + lastName;
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, departamentId, salary);
     }
+
+    @Override
+        public String toString() {
+       // return firstName + lastName + " отдел: " + departamentId + ", зарплата: " + salary;
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", departmentId=" + departamentId +
+                ", salary=" + salary +
+                '}';
+    }
+
 }

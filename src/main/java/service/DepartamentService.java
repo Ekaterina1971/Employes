@@ -1,5 +1,8 @@
-package org.skypro.list;
+package service;
 
+import org.skypro.list.Employee;
+import org.skypro.list.EmployeeService;
+import org.skypro.list.EmployeeServiceMapImplementation;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -12,8 +15,8 @@ import java.util.stream.Collectors;
 public class DepartamentService {
     private EmployeeService employeeService;
 
-    public DepartamentService(EmployeeService employeeService) {
-        this.employeeService = new EmployeeServiceMapImplementation();
+    public DepartamentService(org.skypro.list.EmployeeService employeeService) {
+        this.employeeService =  new EmployeeServiceMapImplementation();
     }
     public Employee getMaxSalaryEmployee(int departamentId) {
         return employeeService.getAllEmployees().stream()

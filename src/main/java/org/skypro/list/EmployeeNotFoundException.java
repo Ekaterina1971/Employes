@@ -12,16 +12,5 @@ public class EmployeeNotFoundException extends RuntimeException {
 
 
 
-//public class EmployeeNotFoundException extends RuntimeException{
- //  public String firstName;
-//  public String lastName;
 
- //  public EmployeeNotFoundException(String firstName, String lastName){
-    //   super();
-    //   this.firstName = firstName;
-     //  this.lastName = lastName;
-  // }
-
-   // public EmployeeNotFoundException(String сотрудникНеНайден) {
-   // }
 

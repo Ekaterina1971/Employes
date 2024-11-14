@@ -1,11 +1,8 @@
 package service;
 
 import org.skypro.list.Employee;
-import org.skypro.list.EmployeeService;
-import org.skypro.list.EmployeeServiceMapImplementation;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +12,8 @@ import java.util.stream.Collectors;
 public class DepartamentService {
     private EmployeeService employeeService;
 
-    public DepartamentService(org.skypro.list.EmployeeService employeeService) {
-        this.employeeService =  new EmployeeServiceMapImplementation();
+    public DepartamentService(EmployeeService employeeService) {
+        this.employeeService =  employeeService;
     }
     public Employee getMaxSalaryEmployee(int departamentId) {
         return employeeService.getAllEmployees().stream()

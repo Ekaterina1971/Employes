@@ -1,4 +1,6 @@
-package org.skypro.list;
+package service;
+
+import org.skypro.list.Employee;
 
 import java.util.Collection;
 

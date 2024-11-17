@@ -1,18 +1,20 @@
-package controller;
+package org.skypro.list.controller;
 
-import org.skypro.list.Employee;
+
+import org.skypro.list.employee.Employee;
+import org.skypro.list.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import service.EmployeeService;
+
 
 import java.util.Collection;
 
 @RestController
 @RequestMapping(path = "/employee")
 public class EmployeeController {
-    private final EmployeeService service;
+    private EmployeeService service;
 
     public EmployeeController(EmployeeService service) {
         this.service = service;
@@ -25,12 +27,12 @@ public class EmployeeController {
 
     @GetMapping("/remove")
     public Employee remove(@RequestParam String firstName, @RequestParam String lastName,@RequestParam int departamentId, @RequestParam double salary) {
-        return service.remove(firstName, lastName,departamentId, salary);
+        return service.remove(firstName, lastName);
     }
 
     @GetMapping("/find")
     public Employee find(@RequestParam String firstName, @RequestParam String lastName,@RequestParam int departamentId, @RequestParam double salary) {
-        return service.find(firstName, lastName,departamentId, salary);
+        return service.find(firstName, lastName);
     }
 
     @GetMapping("/findAll")

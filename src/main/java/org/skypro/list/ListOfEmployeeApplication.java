@@ -10,6 +10,7 @@ import java.util.Map;
 public class ListOfEmployeeApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(ListOfEmployeeApplication.class, args);
 	}
 

@@ -1,5 +1,6 @@
 package org.skypro.list.service;
 
+import jakarta.annotation.PostConstruct;
 import org.skypro.list.employee.Employee;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+
 public class DepartmentServiceImpl implements DepartmentService {
     private final EmployeeService employeeService;
 

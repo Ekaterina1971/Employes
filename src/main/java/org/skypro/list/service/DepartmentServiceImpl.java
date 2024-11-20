@@ -33,7 +33,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .orElseThrow();
     }
 
-    public Collection<Employee> getAllEmployeeByDepartment(int departmentId) {
+    public List<Employee> getAllEmployeeByDepartment(int departmentId) {
         return employeeService.getAllEmployees().stream()
                 .filter(emp -> emp.getDepartmentId() == departmentId)
                 .collect(Collectors.toList());

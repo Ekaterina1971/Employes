@@ -2,20 +2,26 @@ package org.skypro.list.employee;
 
 import java.util.Objects;
 
+import static org.springframework.util.StringUtils.capitalize;
+
 public class Employee {
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
     private int departmentId;
     private double salary;
 
     public Employee(String firstName, String lastName, int departmentId, double salary) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+       // this.firstName = firstName;
+       // this.lastName = lastName;
+        this.firstName = capitalize(firstName.toLowerCase());
+        this.lastName = capitalize(lastName.toLowerCase());
         this.departmentId = departmentId;
         this.salary = salary;
     }
 
     public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getFirstName() {

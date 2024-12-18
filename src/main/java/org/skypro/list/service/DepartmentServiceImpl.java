@@ -32,6 +32,12 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .min(Comparator.comparingDouble(Employee::getSalary))
                 .orElseThrow();
     }
+    public double sumSalaryByDepartment(int departmentId) {
+        return employeeService.getAllEmployees().stream()
+                .filter(emp-> emp.getDepartmentId() == departmentId)
+                .mapToDouble(Employee::getSalary)
+                .sum();
+    }
 
     public List<Employee> getAllEmployeeByDepartment(int departmentId) {
         return employeeService.getAllEmployees().stream()

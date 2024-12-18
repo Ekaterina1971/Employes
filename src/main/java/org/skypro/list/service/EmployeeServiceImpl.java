@@ -6,8 +6,6 @@ import org.skypro.list.exception.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,18 +20,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         initializeEmployees();
     }
 
+
     // Метод для инициализации данных
     private void initializeEmployees() {
         add("Ivan", "Petrov", 1, 22_500);
-        add("Vera", "Vasileva", 2, 34_546);
-        add("Marya", "Ivanova", 3, 42_100);
-        add("Victor", "Kovrov", 4, 19_900);
-        add("Pavel", "Vasilev", 5, 54_500);
-        add("Vlad", "Fedorov", 1, 24_700);
-        add("Olga", "Voronova", 2, 31_600);
-        add("Timur", "Baskov", 3, 40_800);
-        add("Damir", "Polkov", 4, 17_400);
-        add("Stepan", "Sidorov", 5, 39_500);
+        add("Vera", "Vasileva", 2, 34_600);
+        add("Marya", "Ivanova", 1, 42_100);
+        add("Victor", "Kovrov", 2, 19_900);
+
     }
 
     @Override

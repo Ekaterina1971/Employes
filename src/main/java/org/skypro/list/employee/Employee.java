@@ -11,10 +11,10 @@ public class Employee {
     private double salary;
 
     public Employee(String firstName, String lastName, int departmentId, double salary) {
-       // this.firstName = firstName;
-       // this.lastName = lastName;
-        this.firstName = capitalize(firstName.toLowerCase());
-        this.lastName = capitalize(lastName.toLowerCase());
+        this.firstName = firstName;
+        this.lastName = lastName;
+       // this.firstName = capitalize(firstName.toLowerCase());
+      //  this.lastName = capitalize(lastName.toLowerCase());
         this.departmentId = departmentId;
         this.salary = salary;
     }

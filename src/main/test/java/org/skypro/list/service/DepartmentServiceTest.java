@@ -17,10 +17,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceTest {
-   // List<Employee> employees = Arrays.asList(new Employee("Ivan", "Petrov", 1, 22_500),
-          //  new Employee("Vera", "Vasileva", 2, 34_600),
-          //  new Employee("Marya", "Ivanova", 1, 42_100),
-          //  new Employee("Victor", "Kovrov", 2, 19_900));
 
     @Mock
     private EmployeeServiceImpl employeeService;

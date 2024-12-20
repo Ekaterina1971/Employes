@@ -2,16 +2,14 @@ package org.skypro.list.controller;
 
 import org.skypro.list.employee.Employee;
 import org.skypro.list.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.DoubleStream;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/department")
 public class DepartmentController {
     private final DepartmentService departmentService;
 
@@ -19,22 +17,26 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("/max-salary")
-    public Employee getMaxSalaryEmployee(@RequestParam("departmentId") int departmentId) {
+    @GetMapping("{id}/salary/max")
+    public double getMaxSalaryEmployee(@RequestParam("departmentId") int departmentId) {
         return departmentService.getMaxSalaryEmployee(departmentId);
 
     }
+    @GetMapping("{id}/salary/sum")
+    public double sumSalaryByDepartment(@RequestParam("departmentId") int departmentId){
+        return departmentService.sumSalaryByDepartment(departmentId);
+    }
 
-    @GetMapping("/min-salary")
-    public Employee getMinSalaryEmployee(@RequestParam("departmentId") int departmentId) {
+    @GetMapping("{id}/salary/min")
+    public double getMinSalaryEmployee(@RequestParam("departmentId") int departmentId) {
         return departmentService.getMinSalaryEmployee(departmentId);
     }
-    @GetMapping("/all/by-department")
+    @GetMapping("/{id}/employees")
     public List<Employee> getAllEmployeeByDepartment(@RequestParam("departmentId") int departmentId) {
         return (List<Employee>) departmentService.getAllEmployeeByDepartment(departmentId);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/department/employees")
     public Map<Integer, List<Employee>> findAllEmployee() {
         return departmentService.findAllEmployee();
     }

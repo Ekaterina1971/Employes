@@ -1,14 +1,11 @@
 package org.skypro.list.service;
 
-import jakarta.annotation.PostConstruct;
 import org.skypro.list.employee.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 @Service
 
@@ -18,25 +15,34 @@ public class DepartmentServiceImpl implements DepartmentService {
     public DepartmentServiceImpl(EmployeeService employeeService) {
         this.employeeService =  employeeService;
     }
-    public Employee getMaxSalaryEmployee(int departmentId) {
+
+
+    public double getMaxSalaryEmployee(int departmentId) {
         return employeeService.getAllEmployees().stream()
                 .filter(emp -> emp.getDepartmentId() == departmentId)
-                .max(Comparator.comparingDouble(Employee::getSalary))
+                .mapToDouble(Employee::getSalary)
+                .max()
                 .orElseThrow();
+
     }
 
 
-    public Employee getMinSalaryEmployee(int departmentId) {
+    public double getMinSalaryEmployee(int departmentId) {
         return employeeService.getAllEmployees().stream()
                 .filter(emp -> emp.getDepartmentId() == departmentId)
-                .min(Comparator.comparingDouble(Employee::getSalary))
+                .mapToDouble(Employee::getSalary)
+                .min()
                 .orElseThrow();
     }
     public double sumSalaryByDepartment(int departmentId) {
-        return employeeService.getAllEmployees().stream()
-                .filter(emp-> emp.getDepartmentId() == departmentId)
-                .mapToDouble(Employee::getSalary)
-                .sum();
+        double sum = 0.0;
+        for (Employee emp : employeeService.getAllEmployees()) {
+            if (emp.getDepartmentId() == departmentId) {
+                double salary = emp.getSalary();
+                sum += salary;
+            }
+        }
+        return sum;
     }
 
     public List<Employee> getAllEmployeeByDepartment(int departmentId) {
@@ -48,9 +54,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Map<Integer, List<Employee>> findAllEmployee() {
-        return employeeService.getAllEmployees()
-                .stream()
-                .collect(Collectors.groupingBy(Employee::getDepartmentId));
+        Map<Integer, List<Employee>> map = new HashMap<>();
+        for (Employee employee : employeeService.getAllEmployees()) {
+            map.computeIfAbsent(employee.getDepartmentId(), k -> new ArrayList<>()).add(employee);
+        }
+        return map;
     }
 
 }

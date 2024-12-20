@@ -1,24 +1,31 @@
 package org.skypro.list.service;
 
-import org.junit.Before;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.skypro.list.employee.Employee;
+import org.skypro.list.exception.EmployeeNotFoundException;
 
 import java.util.Map;
 
 public class EmployeeServiceTest {
     @Mock
+    EmployeeService employeeServiceMock ;
+
     private Map<String, Employee> employeeMap;
 
     @InjectMocks
-    private EmployeeServiceImpl employeeService;
+    EmployeeService employeeService = new EmployeeServiceImpl();
+    //private EmployeeServiceImpl employeeService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
     }
@@ -70,12 +77,11 @@ public class EmployeeServiceTest {
     }
     @Test
     public void testFind_NotFound() {
-        String firstName = "Ivan";
-        String lastName = "Petrov";
 
-        Mockito.when(employeeMap.containsKey(Mockito.anyString())).thenReturn(false);
+        Assertions.assertThrows(EmployeeNotFoundException.class, () -> {
+            employeeService.find("Nikolai", "Sergeerv");
+        });
 
-        employeeService.find(firstName, lastName);
     }
 
 

@@ -14,6 +14,6 @@ public class EmployeeStoragelsFullException extends RuntimeException{
         this.lastName = lastName;
     }
 
-    public EmployeeStoragelsFullException(String превышенЛимитСотрудников) {
-    }
+    //public EmployeeStoragelsFullException(String превышенЛимитСотрудников) {
+   // }
 }

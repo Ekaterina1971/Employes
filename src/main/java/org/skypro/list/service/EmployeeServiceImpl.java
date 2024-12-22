@@ -31,12 +31,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String firstName, String lastName, int departmentId, double salary) {
+    public Employee add(String firstName, String lastName, int departmentId, double salary) throws EmployeeAlreadyAddedException {
         Employee newEmployee = new Employee(firstName, lastName, departmentId, salary);
         String key = getKey(firstName, lastName);
-        if (employees.containsKey(key)) {
+        if (employees.containsKey(key)){
             throw new EmployeeAlreadyAddedException();
-        }
+            }
+
         employees.put(key, newEmployee);
         return newEmployee;
     }

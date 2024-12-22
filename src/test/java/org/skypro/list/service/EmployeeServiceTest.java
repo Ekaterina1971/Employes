@@ -4,12 +4,9 @@ package org.skypro.list.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.skypro.list.employee.Employee;
 import org.skypro.list.exception.EmployeeNotFoundException;
 
@@ -17,11 +14,11 @@ import java.util.Map;
 
 public class EmployeeServiceTest {
     @Mock
-    EmployeeService employeeServiceMock ;
+   // EmployeeService employeeServiceMock ;
 
     private Map<String, Employee> employeeMap;
 
-    @InjectMocks
+  //  @InjectMocks
     EmployeeService employeeService = new EmployeeServiceImpl();
     //private EmployeeServiceImpl employeeService;
 
@@ -38,7 +35,8 @@ public class EmployeeServiceTest {
         Mockito.when(employeeMap.containsKey(Mockito.anyString())).thenReturn(false);
         Mockito.when(employeeMap.put(Mockito.anyString(), Mockito.any(Employee.class))).thenReturn(null);
 
-        Employee result = employeeService.add(firstName, lastName, departmentId, salary);
+        Employee result;
+        result = employeeService.add(firstName, lastName, departmentId, salary);
 
         Assertions.assertEquals(firstName, result.getFirstName());
         Assertions.assertEquals(lastName, result.getLastName());

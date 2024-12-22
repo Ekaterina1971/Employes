@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
+
 
 @Service
 
@@ -16,7 +16,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.employeeService =  employeeService;
     }
 
-
+@Override
     public double getMaxSalaryEmployee(int departmentId) {
         return employeeService.getAllEmployees().stream()
                 .filter(emp -> emp.getDepartmentId() == departmentId)
@@ -26,7 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     }
 
-
+@Override
     public double getMinSalaryEmployee(int departmentId) {
         return employeeService.getAllEmployees().stream()
                 .filter(emp -> emp.getDepartmentId() == departmentId)
@@ -34,6 +34,8 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .min()
                 .orElseThrow();
     }
+
+@Override
     public double sumSalaryByDepartment(int departmentId) {
         double sum = 0.0;
         for (Employee emp : employeeService.getAllEmployees()) {
@@ -44,7 +46,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         return sum;
     }
-
+@Override
     public List<Employee> getAllEmployeeByDepartment(int departmentId) {
         return employeeService.getAllEmployees().stream()
                 .filter(emp -> emp.getDepartmentId() == departmentId)

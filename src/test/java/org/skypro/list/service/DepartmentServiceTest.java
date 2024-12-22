@@ -29,7 +29,7 @@ void DepartmentServiceIml(){}
 
     @BeforeEach
     void init() {
-      List<Employee> employees = Arrays.asList(new Employee("Ivan", "Petrov", 1, 22_500),
+        employees = Arrays.asList(new Employee("Ivan", "Petrov", 1, 22_500),
                   new Employee("Vera", "Vasileva", 2, 34_6000),
                   new Employee("Marya", "Ivanova", 1, 42_100),
                   new Employee("Victor", "Kovrov", 2, 19_900));
@@ -39,6 +39,7 @@ void DepartmentServiceIml(){}
 
     @Test
     void getMaxSalary(){
+        when(employeeService.getAllEmployees()).thenReturn(employees);
         double actual;
         actual = departmentService.getMaxSalaryEmployee(1);
         Assertions.assertEquals(42_100,actual);
@@ -46,13 +47,15 @@ void DepartmentServiceIml(){}
     }
     @Test
     void getMinSalary(){
+        when(employeeService.getAllEmployees()).thenReturn(employees);
         double actual = departmentService.getMinSalaryEmployee(2);
         Assertions.assertEquals(19_900,actual);
     }
     @Test
     void sum(){
+        when(employeeService.getAllEmployees()).thenReturn(employees);
        double actual = departmentService.sumSalaryByDepartment(1);
-       Assertions.assertEquals(67_700, actual);
+       Assertions.assertEquals(64_600, actual);
     }
     @Test
     void getAllEmployeeByDepartment(){

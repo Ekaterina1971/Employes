@@ -23,23 +23,23 @@ public class Employee {
     }
 
     public String getFirstName() {
-      return firstName;
+        return firstName;
     }
 
     public String getLastName() {
-       return lastName;
+        return lastName;
     }
 
-    public String getFullName(){
+    public String getFullName() {
         return firstName + lastName;
     }
 
-    public int getDepartmentId(){
-       return departmentId;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public double getSalary(){
-       return salary;
+    public double getSalary() {
+        return salary;
     }
 
     public void setDepartmentId(int departmentId) {
@@ -62,8 +62,8 @@ public class Employee {
     }
 
     @Override
-        public String toString() {
-         return "Employee{" +
+    public String toString() {
+        return "Employee{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", departmentId=" + departmentId +
@@ -71,4 +71,7 @@ public class Employee {
                 '}';
     }
 
+    public int size() {
+        return 0;
+    }
 }

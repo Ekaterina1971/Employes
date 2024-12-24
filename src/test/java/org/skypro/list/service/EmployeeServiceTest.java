@@ -1,6 +1,4 @@
 package org.skypro.list.service;
-
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,69 +8,61 @@ import org.mockito.MockitoAnnotations;
 import org.skypro.list.employee.Employee;
 import org.skypro.list.exception.EmployeeNotFoundException;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-public class EmployeeServiceTest {
-    @Mock
-   // EmployeeService employeeServiceMock ;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class EmployeeServiceTest{
 
     private Map<String, Employee> employeeMap;
 
-  //  @InjectMocks
     EmployeeService employeeService = new EmployeeServiceImpl();
-    //private EmployeeServiceImpl employeeService;
 
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
+    @Test
+    public void add(){
+        Employee expected = new Employee("Ivan", "Kotov", 1, 29_500);
+        assertEquals( 0, employeeService.getAllEmployees().size());
+        assertFalse(employeeService.getAllEmployees().contains(expected));
+        Employee actual = employeeService.add("Ivan","Kotov",1, 29_500);
+
+        assertEquals(expected, actual);
+        assertEquals(1, employeeService.getAllEmployees().size());
+        assertTrue(employeeService.getAllEmployees().contains(expected));
+
     }
     @Test
-    void add(){
-        String firstName = "Ivan";
-        String lastName = "Petrov";
-        int departmentId = 1;
-        double salary = 22_500;
-        Mockito.when(employeeMap.containsKey(Mockito.anyString())).thenReturn(false);
-        Mockito.when(employeeMap.put(Mockito.anyString(), Mockito.any(Employee.class))).thenReturn(null);
-
-        Employee result;
-        result = employeeService.add(firstName, lastName, departmentId, salary);
-
-        Assertions.assertEquals(firstName, result.getFirstName());
-        Assertions.assertEquals(lastName, result.getLastName());
-        Assertions.assertEquals(departmentId, result.getDepartmentId());
-        Assertions.assertEquals(salary, result.getSalary());
-
+    public void addNew(){
+        Employee actual = employeeService.add("Ivan","Kotov",1, 29_500);
+        assertTrue(employeeService.getAllEmployees().contains(actual));
+        assertThrows(RuntimeException.class,
+                () -> employeeService.add("Ivan","Kotov",1,29_500));
     }
+
+
+    @Test
+    public void find() {
+        Employee actual = employeeService.add("Ivan", "Kotov",1,29_500);
+
+        assertEquals(actual,employeeService.find("Ivan","Kotov"));
+    }
+
+
     @Test
     void remove() {
-        String firstName = "Ivan";
-        String lastName = "Petrov";
-        Mockito.when(employeeMap.remove(Mockito.anyString())).thenReturn(new Employee(firstName, lastName));
+        Employee expected = employeeService.add("Ivan", "Kotov",1,29_500);
+        assertTrue(employeeService.getAllEmployees().contains(expected));
+        assertEquals(1,employeeService.getAllEmployees().size());
 
-        Employee result = employeeService.remove(firstName, lastName);
+        Employee removeEmployee = employeeService.remove(expected.getFirstName(), expected.getLastName());
+        assertEquals(expected, removeEmployee);
+        assertFalse(employeeService.getAllEmployees().contains(expected));
+        assertEquals(0,employeeService.getAllEmployees().size());
 
-        Assertions.assertEquals(firstName, result.getFirstName());
-        Assertions.assertEquals(lastName, result.getLastName());
-
-    }
-    @Test
-    void find() {
-        String firstName = "Ivan";
-        String lastName = "Petrov";
-        int departmentId = 1;
-        double salary = 22_500;
-        Mockito.when(employeeMap.containsKey(Mockito.anyString())).thenReturn(true);
-        Mockito.when(employeeMap.get(Mockito.anyString())).thenReturn(new Employee(firstName, lastName, departmentId, salary));
-
-        Employee result = employeeService.find(firstName, lastName);
-
-        Assertions.assertEquals(firstName, result.getFirstName());
-        Assertions.assertEquals(lastName, result.getLastName());
-        Assertions.assertEquals(departmentId, result.getDepartmentId());
-        Assertions.assertEquals(salary, result.getSalary());
 
     }
+
     @Test
     public void testFind_NotFound() {
 
@@ -81,10 +71,15 @@ public class EmployeeServiceTest {
         });
 
     }
-
+    @Test
+    public void shouldReturnAllEmployees(){
+        Employee employee1 = employeeService.add("Ivan","Kotov",1,29_500);
+        Employee employee2 = employeeService.add("Ivan","Petrov",1,33_200);
+        Collection<Employee> expected = List.of(employee2, employee1);
+        Collection<Employee> actual = employeeService.getAllEmployees();
+        assertIterableEquals(expected,actual);
+    }
 
 }
-
-
 
 

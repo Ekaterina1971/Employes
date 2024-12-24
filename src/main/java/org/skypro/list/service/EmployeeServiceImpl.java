@@ -17,26 +17,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeServiceImpl() {
         // Инициализируем и наполняем employees при создании экземпляра класса
         employees = new HashMap<>();
-        initializeEmployees();
+      //  initializeEmployees();
     }
 
 
     // Метод для инициализации данных
-    private void initializeEmployees() {
-        add("Ivan", "Petrov", 1, 22_500);
-        add("Vera", "Vasileva", 2, 34_600);
-        add("Marya", "Ivanova", 1, 42_100);
-        add("Victor", "Kovrov", 2, 19_900);
+  //  private void initializeEmployees() {
+      //  add("Ivan", "Petrov", 1, 22_500);
+      //  add("Vera", "Vasileva", 2, 34_600);
+       // add("Marya", "Ivanova", 1, 42_100);
+      //  add("Victor", "Kovrov", 2, 19_900);
 
-    }
+   // }
 
     @Override
     public Employee add(String firstName, String lastName, int departmentId, double salary) throws EmployeeAlreadyAddedException {
         Employee newEmployee = new Employee(firstName, lastName, departmentId, salary);
         String key = getKey(firstName, lastName);
-        if (employees.containsKey(key)){
+        if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedException();
-            }
+        }
 
         employees.put(key, newEmployee);
         return newEmployee;
